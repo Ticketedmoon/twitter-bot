@@ -8,3 +8,4 @@
 > This is a small project.
 
 ### Important code snippets & Information will be logged below
+[+ My Twitter](https://twitter.com/shane_creedon)
