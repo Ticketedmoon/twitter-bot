@@ -20,7 +20,7 @@ def tweet():
 				# Once we hit a line that has not been tweeted before.
 				# Tweet it and wait 10 seconds
 				api.update_status(line)
-				sleep(10)
+				sleep(60)
 
 		except tweepy.TweepError as e:
 			# If we encounter an error
