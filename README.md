@@ -10,7 +10,7 @@
 ---
 
 ### Important code snippets & Information will be logged below
-###### Current Iteration of the bot:
+#### Current Iteration of the bot:
 Currently the bot automatically retweets something interesting based on a selection of interesting topics.  
 For example, the bot may retweet something interesting about software engineering in one tweet, and then may  
 retweet something about gaming or art.  
