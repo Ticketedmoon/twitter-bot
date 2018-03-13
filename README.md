@@ -12,7 +12,7 @@ involving constructing creative sentences from other user's tweets.
 ### Important code snippets & Information will be logged below
 *The tools I am using are:*  
 	1. Javascript  
-	2. Node.js	
+	2. Node.js  
 	3. NPM  
 
 I have a Node server running on my DigitalOcean server which is able to GET data and POST data from Twitter.  
