@@ -7,31 +7,77 @@ var Twit = require('twit');
 
 // Config package (We made it)
 // Specify path, not just filename
-var config = require('./config');
+var Config = require('./config');
 
 // Filesystem API
 // used for saved information directly to file (JSON_output.txt)
-var fs = require('fs');
+var Fs = require('fs');
+
+// Python NPM package
+var PythonShell = require('python-shell');
 
 // More twit api important OAuth information.
 // Much cleaner with config file!
-var T = new Twit(config);
+var T = new Twit(Config);
 console.log("> Config file successfully loaded.");
 
+var stream = T.stream('user');
+stream.on('follow', followed);
+
+// Function takes event parameter relating to the 'user' who followed.
+// event is the User object.
+function followed(event) {
+	// Default Info
+	console.log("Follow event triggered!");
+	var name = event.source.name;
+	var screenName = event.source.screen_name;	
+
+	// Respond to follow
+	postTweet("Hey @" + screenName + ", Thank you for following!");
+}
+
 // Start Twitter Interaction
-// Apply Automation settings using setInterval()
-setInterval(postTweet, 1000*20)
+postTweet("suh");
 //End Twitter Interaction
 
 // -- POST RESPONSE --
-function postTweet() {
-
+function postTweet(tweetMsg) {
+	
 	// Settings
-	var r = Math.floor(Math.random()*100);
+	PythonShell.run('./Python-Scripts/my_script.py', function (err) {
+		if (err) throw err;
+		console.log('Image Saved (./Media)');
+		processing();
+	});
+	
+	// Set Up Image & Upload to twitter staging room
+	function processing() {	
+		var filename = './Media/test.jpg';
 
-	// Create tweet object (passed into post)
-	var tweet = {
-		status: 'Random N-value: ' + r + '\n#CreedoBot'
+		var params = {
+			encoding: 'base64'
+		}
+
+		var b64 = Fs.readFileSync(filename, params);
+		T.post('media/upload', { media_data: b64}, uploaded); // uploaded is callBack
+	}
+
+	// Callback function when image is uploaded
+	function uploaded(err, data, response) {
+		
+		console.log("Image successfully pushed to Twitter staging...");
+
+		var r = Math.floor(Math.random()*100);
+		var id = data.media_id_string;
+	
+		// Since the image is uploaded, we construct our tweet obj:
+		var tweet = {
+ 			status: tweetMsg + '\n' + 'Your random N-value: ' + r + '\n#CreedoBot',
+			media_ids: [id]
+		}
+	
+		T.post('statuses/update', tweet, tweeted);
+		
 	}
 
 	function tweeted(err, data, response) {
@@ -49,7 +95,6 @@ function postTweet() {
 		}
 	}
 
-	T.post('statuses/update', tweet, tweeted);
 }
 
 // -- GET REQUEST -- 
@@ -66,7 +111,7 @@ function getTwitterInformation() {
 		console.log("~ Receiving data from Twitter...\n");
 
 		// Store JSON data in seperate file
-		fs.writeFile("JSON_OUTPUT.txt", JSON.stringify(data, null, '-----------\n'), function(err) {
+		Fs.writeFile("./Log-Files/JSON_OUTPUT.txt", JSON.stringify(data, null, '-----\n'), function(err) {
     		if(err) {
         		return console.log(err);
     		}
