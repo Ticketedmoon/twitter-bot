@@ -1,4 +1,4 @@
-<h1 style="color: blue; font-family: courier;"> Twitter-Bot </h1>
+## Twitter-Bot
 
 <img src="./Media/twitter_bird_robot.png" width="256" height="256">
 
