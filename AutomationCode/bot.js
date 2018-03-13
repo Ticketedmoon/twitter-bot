@@ -37,7 +37,7 @@ function followed(event) {
 	var screenName = event.source.screen_name;	
 
 	// Respond to follow
-	postTweet("Hey @" + screenName + ", Thank you for following!");
+	postTweet("Hey @" + screenName + ",\nThank you for following!");
 }
 
 /**
