@@ -1,16 +1,14 @@
 ## Twitter-Bot
 
-<img src="./Media/twitter_bird_robot.png" width="256" height="256">
+<img src="./Media/twitter_bird_robot.png" width="640" height="480">
 
 ---
 ### A Creedo-Bot project
-> The basic idea is when a user tweets me or follows me they will receive a message, thanking them.  
-> I might have other creative ideas implemented into the project involving constructing creative  
-> sentences from other user's tweets.  
-> This is a small project.  
-> This project idea is best utilised on a server  
----
+A twitter bot, responding and interacting with Twitter automatically.
+I might have other creative ideas implemented into the project  
+involving constructing creative sentences from other user's tweets.  
 
+---
 ### Important code snippets & Information will be logged below
 The tools I am using are:  
 	1. Javascript
