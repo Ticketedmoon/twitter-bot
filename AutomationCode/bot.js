@@ -1,7 +1,10 @@
 // Initialise Node Message
 console.log("Starting Twitter Bot...");
 
-// Require NPM API's
+// Other Fields / Variables
+var newFollower = false;
+
+// Begin Requires
 // It looks in the node_modules folder for twit package
 var Twit = require('twit');
 
@@ -28,6 +31,7 @@ stream.on('follow', followed);
 // event is the User object.
 function followed(event) {
 	// Default Info
+	newFollower = true;
 	console.log("Follow event triggered!");
 	var name = event.source.name;
 	var screenName = event.source.screen_name;	
@@ -36,24 +40,30 @@ function followed(event) {
 	postTweet("Hey @" + screenName + ", Thank you for following!");
 }
 
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive)
+ * Using Math.round() will give you a non-uniform distribution!
+ */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 // Start Twitter Interaction
-postTweet("suh");
-//End Twitter Interaction
+setInterval( function() {
+	postTweet("Random Image of the Day")
+}, 1000*60*60*24);
+// End Twitter Interaction
 
 // -- POST RESPONSE --
 function postTweet(tweetMsg) {
 	
 	// Settings
-	PythonShell.run('./Python-Scripts/my_script.py', function (err) {
-		if (err) throw err;
-		console.log('Image Saved (./Media)');
-		processing();
-	});
+	var randomNum = getRandomInt(1, 18);
+	processing();
 	
 	// Set Up Image & Upload to twitter staging room
 	function processing() {	
-		var filename = './Media/test.jpg';
-
+		var filename = './Temp-Images/image-' + randomNum + '.png';
 		var params = {
 			encoding: 'base64'
 		}
@@ -68,11 +78,18 @@ function postTweet(tweetMsg) {
 		console.log("Image successfully pushed to Twitter staging...");
 
 		var r = Math.floor(Math.random()*100);
-		var id = data.media_id_string;
+		var id = null;
+
+		// Check if its a follower notification or image of the day
+		// If follower, don't show image, simply thank them...
+		if (!newFollower) {
+			id = data.media_id_string;
+			newFollower = false;
+		}
 	
 		// Since the image is uploaded, we construct our tweet obj:
 		var tweet = {
- 			status: tweetMsg + '\n' + 'Your random N-value: ' + r + '\n#CreedoBot',
+ 			status: tweetMsg + '\n' + 'Your lucky number today is: ' + r + '\n#CreedoBot',
 			media_ids: [id]
 		}
 	
@@ -86,6 +103,7 @@ function postTweet(tweetMsg) {
 		// Since we are not returning any information.
 		// So, lets use it for a validity check.
 		if (err) {
+			console.log(err);
 			console.log("Something went wrong!");
 		}
 		else {
