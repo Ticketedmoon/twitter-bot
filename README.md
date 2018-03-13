@@ -1,6 +1,6 @@
 # Twitter-Bot
 
-!["Twitter Bot Logo"](./Media/twitter_bird_robot.png =250x250)
+<img src="./Media/twitter_bird_robot.png" width="100" height="100">
 
 ---
 ### A Creedo-Bot project
