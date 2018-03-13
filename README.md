@@ -1,6 +1,6 @@
-# Twitter-Bot
+<h1 style="color: blue; font-family: courier;"> Twitter-Bot </h1>
 
-<img src="./Media/twitter_bird_robot.png" width="100" height="100">
+<img src="./Media/twitter_bird_robot.png" width="256" height="256">
 
 ---
 ### A Creedo-Bot project
