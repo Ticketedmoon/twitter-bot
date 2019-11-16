@@ -3,7 +3,7 @@
 <img src="./Media/twitter_bird_robot.png" width="640" height="480">
 
 ---
-### A Creedo-Bot project
+### A Twitter-Bot project
 A twitter bot, responding and interacting with Twitter automatically.  
 I might have other creative ideas implemented into the project  
 involving constructing creative sentences from other user's tweets.  
