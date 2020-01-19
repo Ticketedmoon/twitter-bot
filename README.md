@@ -1,6 +1,6 @@
 ## Twitter-Bot
 
-<img src="./resource/assets/images/twitter_bird_robot.png" width="640" height="480">
+<img src="./resources/assets/images/twitter_bird_robot.png" width="640" height="480">
 
 ---
 ### A Twitter-Bot project
